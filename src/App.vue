@@ -1,17 +1,18 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <Header />
+    <router-view/>
+    <br>
+    <input type="button" value="Clear List" class="btn2">
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Header from './components/layout/Header';
 export default {
-  name: 'App',
+  name:"app",
   components: {
-    HelloWorld
+    Header
   }
 }
 </script>
@@ -21,8 +22,42 @@ export default {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
+  text-align: left;
   color: #2c3e50;
-  margin-top: 60px;
 }
+
+#nav {
+  padding: 10px;
+  padding-right: 5px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #ffffff;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
+}
+
+#home:hover {
+  color:#42b983;
+}
+
+#about:hover {
+  color:#42b983;
+}
+
+.btn2 {
+  font-size: 18px;
+  padding: 5px;
+  margin-left: 20px;
+  background:#42b983;
+  border-style: solid;
+  color: #ffffff;
+}
+.btn2:hover {
+  background: #000000;
+}
+
 </style>
