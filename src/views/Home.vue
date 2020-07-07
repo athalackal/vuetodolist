@@ -2,7 +2,7 @@
   <div id="app">
     {{test}}
     <button @click="test=5">Click</button>
-    <AddTodo @add-todo="addTodo" />
+    <AddTodo @add-todo="addTodo" /> 
     <Todos :todos="todos" @del-todo="deleteTodo" />
   </div>
 </template>

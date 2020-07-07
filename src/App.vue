@@ -48,16 +48,4 @@ export default {
   color:#42b983;
 }
 
-.btn2 {
-  font-size: 18px;
-  padding: 5px;
-  margin-left: 20px;
-  background:#42b983;
-  border-style: solid;
-  color: #ffffff;
-}
-.btn2:hover {
-  background: #000000;
-}
-
 </style>
