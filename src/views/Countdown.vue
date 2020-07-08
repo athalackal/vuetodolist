@@ -18,6 +18,7 @@
 
 export default {
     data() {
+        return {}
        //var m = moment() 
        //return console.log('Original Moment: ' + $(m.toString()
       
