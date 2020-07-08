@@ -2,13 +2,13 @@
   <div id="app">
     <Header />
     <router-view/>
-    <br>
-    <input type="button" value="Clear List" class="btn2">
   </div>
 </template>
 
 <script>
 import Header from './components/layout/Header';
+// import moment from 'moment';
+
 export default {
   name:"app",
   components: {
@@ -44,8 +44,13 @@ export default {
   color:#42b983;
 }
 
-#about:hover {
+#reminders:hover {
   color:#42b983;
 }
+
+#countdown:hover {
+  color:#42b983;
+}
+
 
 </style>

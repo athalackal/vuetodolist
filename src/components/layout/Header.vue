@@ -1,9 +1,10 @@
 <template>
     <header class="header">
-        <h1>TODO LIST</h1>
+        <h1>TO-DO LIST</h1>
         <div id="nav">
-            <router-link to="/" id="home">Home</router-link>|  
-            <router-link to="/about" id="about">About</router-link>
+            <router-link to="/" id="home">To-dos</router-link>|  
+            <router-link to="/reminders" id="reminders">Reminders</router-link>|
+            <router-link to="/countdown" id="countdown">Countdown Timer</router-link>
         </div>
     </header>
 </template>

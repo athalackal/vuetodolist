@@ -1,16 +1,17 @@
 <template>
   <div id="app">
-    {{test}}
-    <button @click="test=5">Click</button>
+    <p> {{counterText}} </p>
+    <br>
     <AddTodo @add-todo="addTodo" /> 
     <Todos :todos="todos" @del-todo="deleteTodo" />
+    <br>
+    <button class="btn2" @click="todos= []" v-show="todos.length > 0">Clear List</button>
   </div>
 </template>
 
 <script>
 import Todos from '../components/Todos';
 import AddTodo from '../components/AddTodo';
-import axios from 'axios';
 
 export default {
   name: 'Home',
@@ -20,31 +21,33 @@ export default {
   },
   data() {
     return {
-      todos: [],
-      test: 3
+      todos: []
     }
   },
   methods: {
-    deleteTodo(id) {
-      axios.delete(`https://jsonplaceholder.typicode.com/todos/${id}`)
-      .then(() => this.todos = this.todos.filter(todo => todo.id !== id))
-      .catch(err => console.log(err));
+    deleteTodo(index) {
+      this.todos.splice(index, 1)
     },
     addTodo(newTodo) {
       const { title, completed } = newTodo;
-
-      axios.post('https://jsonplaceholder.typicode.com/todos', { 
-          title,
-          completed
-         })
-          .then(res => this.todos = [...this.todos, res.data])
-          .catch(err => console.log(err));
+      this.todos.push({
+        title,
+        completed
+      });
     }
   },
-  created() {
-    axios.get('https://jsonplaceholder.typicode.com/todos?_limit=0')
-    .then(res => this.todos = res.data)
-    .catch(err => console.log(err));
+  computed: {
+    incompletedTodos: function() {
+      return this.todos.filter(function(complete) {
+        return complete.completed !== true;
+      });
+    },
+    counterText: function() {
+      if (this.incompletedTodos.length == 0) return "You currently have nothing to do."
+      
+      else if (this.incompletedTodos.length == 1) return "You have 1 thing left to do today."
+      else return `You have ` + this.incompletedTodos.length + ` things to do today.`
+   }
   }
 }
 </script>
@@ -54,6 +57,11 @@ export default {
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+  }
+  p {
+    font-weight: bold;
+    margin-top: 10px;
+    margin-left: 10px;
   }
   body {
     font-family: Arial, Helvetica, sans-serif;

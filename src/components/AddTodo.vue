@@ -41,8 +41,11 @@ export default {
     input[type="text"] {
         flex: 10;
         padding: 5px;
+        margin-left: 5px;
+        margin-right: 5px;
     }
     input[type="submit"] {
         flex: 2;
+        margin-right: 5px;
     }
 </style>

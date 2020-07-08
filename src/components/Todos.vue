@@ -1,8 +1,8 @@
 <template>
     <div>
-        <div v-bind:key="todo.id" v-for="todo in todos">
+        <div v-bind:key="todo.id" v-for="(todo, index) in todos">
             <TodoItem :todo="todo" 
-            @del-todo="$emit('del-todo', todo.id)"/>
+            @del-todo="$emit('del-todo', index)"/>
         </div>
     </div>
 </template>
