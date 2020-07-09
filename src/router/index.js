@@ -4,7 +4,7 @@ import Home from '../views/Home.vue'
 import moment from 'moment'
 
 Vue.use(VueRouter)
-  Vue.prototype.moment = moment;
+  Vue.prototype.$moment = moment;
   const routes = [
   {
     path: '/',
