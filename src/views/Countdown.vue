@@ -6,13 +6,10 @@
     <br />
     <h3 class="text">Select a date and time to complete to-do by:</h3>
     <br />
-		{{ time }}
-    <input type="date" class="date" v-model="date"/>
-    <input type="time" class="time" v-model="time" />
+    <input type="datetime-local" class="datetime" :value="datetime" @input="handleDateTimeInput" />
     <br />
     <br />
-    <h3 class="text">Time left to complete: {{$moment()}}</h3>
-		{{ $moment()}}
+    <h3 class="text" v-if="showTimeLeft">Time left to complete: {{countdownTimer}}</h3>
     <br />
   </div>
 </template>
@@ -24,25 +21,35 @@
 	then format and display it in the html
 */
 export default {
-    data() {
-			console.log('Original Moment: ', this.$moment().toString())
-			setInterval(function() {
-				this.seconds--
-			}, 1)
-			return {
-				date: this.$moment().format('YYYY-MM-DD'),
-				time: this.$moment().format('HH:MM')
-			}
+  data() {
+    console.log("Original Moment: ", this.$moment().format("YYYY-MM-DDTHH:mm"));
+    setInterval(function() {
+      this.seconds--;
+    }, 1);
+    return {
+      datetime: this.$moment().format("YYYY-MM-DDTHH:mm"),
+      showTimeLeft: false
     }
-}
+  },
+  methods: {
+    handleDateTimeInput(e) {
+      this.datetime = e.target.value,
+      this.showTimeLeft = true
+      console.log(e);
+    }
+  },
+  computed: {
+    countdownTimer() {
+      const timeDifferece = this.$moment(this.datetime).diff(this.$moment(), "seconds");
+      return timeDifferece;
+    }
+  }
+};
 </script>
 
 <style scoped>
-.date {
+.datetime {
   margin-left: 10px;
-}
-.time {
-  margin-left: 15px;
 }
 .text {
   margin-left: 10px;
