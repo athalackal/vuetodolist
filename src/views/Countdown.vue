@@ -6,10 +6,15 @@
     <br />
     <h3 class="text">Select a date and time to complete to-do by:</h3>
     <br />
-    <input type="datetime-local" class="datetime" :value="datetime" @input="handleDateTimeInput" />
+    <div>
+      <span> 
+        <input type="datetime-local" class="datetime" :value="datetime" @input="handleDateTimeInput" />
+        <button class="startTimer" @click="startTimerHandler()"> Start Timer </button>
+      </span>
+    </div>
     <br />
     <br />
-    <h3 class="text" v-if="showTimeLeft">Time left to complete: {{countdownTimer}}</h3>
+    <h3 class="text">{{timeLeftText}}</h3>
     <br />
   </div>
 </template>
@@ -28,7 +33,9 @@ export default {
     }, 1);
     return {
       datetime: this.$moment().format("YYYY-MM-DDTHH:mm"),
-      showTimeLeft: false
+      showTimeLeft: false,
+      timeLeft: 0,
+      timer: null
     }
   },
   methods: {
@@ -36,18 +43,45 @@ export default {
       this.datetime = e.target.value,
       this.showTimeLeft = true
       console.log(e);
+    },
+    startTimerHandler () {
+      let vm = this
+      if (this.timer) clearInterval(this.timer)
+      const timeDifference = this.$moment(this.datetime).diff(this.$moment(), "seconds");
+      this.timeLeft = timeDifference
+      this.timer = setInterval(function () {
+        vm.timeLeft--
+        if (vm.timeLeft <= 0)  clearInterval(vm.timer)
+      }, 1000)
+
+      // console.log('this.timer', this.timer);
+      // clearInterval(this.timer)
+            // console.log('this.timer after', this.timer);
+
+
     }
   },
   computed: {
-    countdownTimer() {
-      const timeDifferece = this.$moment(this.datetime).diff(this.$moment(), "seconds");
-      return timeDifferece;
+    timeLeftText () {
+      if (this.timeLeft < 1) return "No time left."
+      else return `You have ${this.timeLeft} seconds left.`
     }
   }
 };
 </script>
 
 <style scoped>
+.startTimer {
+  margin-left: 20px;
+  padding: 7px;
+  background-color: #42b983;
+  border: none;
+  font-weight: bold;
+  border-radius: 5px;
+  color: white;
+
+
+}
 .datetime {
   margin-left: 10px;
 }

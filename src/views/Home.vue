@@ -10,6 +10,20 @@
 </template>
 
 <script>
+/*
+  Add due date button
+
+  When you click the due date button you will call a function that will accept an index.
+
+  That index corresponds to the todo.
+
+  Update the todo object to have a dueDate, timeLeft, and timerInterval properties.
+
+  The timerInterval should be an interval set to decrement every one second and clear itself if 
+  there is already a timer on the todo or the timeLeft has reached 0 or less.
+
+  Display the time left on the right hand side of the todo in days hours minutes seconds.
+*/
 import Todos from '../components/Todos';
 import AddTodo from '../components/AddTodo';
 
@@ -30,10 +44,11 @@ export default {
     },
     addTodo(newTodo) {
       const { title, completed } = newTodo;
-      this.todos.push({
+      let todo = {
         title,
         completed
-      });
+      }
+      this.todos.push(todo);
     }
   },
   computed: {
